@@ -1,4 +1,5 @@
 import modelo.Agenda;
+import modelo.Contacto;
 import vista.VentanaInicio;
 
 public class AgendaMain {
@@ -13,6 +14,9 @@ public class AgendaMain {
 		Agenda agenda = new Agenda();
 		VentanaInicio vi = new VentanaInicio(agenda);
 		vi.setVisible(true);
+		for(Contacto contacto : agenda.getContactos()){
+			System.out.println(contacto);
+		}
 	}
 
 }

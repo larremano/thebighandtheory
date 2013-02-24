@@ -2,9 +2,7 @@ package vista;
 
 import java.awt.BorderLayout;
 
-
 import modelo.Agenda;
-import modelo.Cita;
 import modelo.Contacto;
 
 public class ControladorVentana {
@@ -12,12 +10,10 @@ public class ControladorVentana {
 	private Agenda agenda = null;
 	private VentanaInicio vi = null;
 	private PanelInicio pi = null;
-	private PanelContactoNuevo pContactoNuevo = null;
+	private PanelContactoNuevo pcn = null;
 	private PanelListarContactos plc = null;
 	private PanelVisualizarContacto pvc = null;
-	private PanelCitaNueva pCitaNueva = null;
-	private PanelListarCitas pListarCitas = null;
-	private PanelVisualizarCita pVisualizarCita = null;
+	
 	
 	public ControladorVentana(Agenda agenda, VentanaInicio vi) {
 		super();
@@ -43,10 +39,10 @@ public class ControladorVentana {
 	}
 	public PanelContactoNuevo crearPanelContactoNuevo(){
 		vi.getJContentPane().removeAll();
-		pContactoNuevo = new PanelContactoNuevo(this);
-		vi.getJContentPane().add(pContactoNuevo, BorderLayout.CENTER);
+		pcn = new PanelContactoNuevo(this);
+		vi.getJContentPane().add(pcn, BorderLayout.CENTER);
 		vi.getJContentPane().updateUI();
-		return pContactoNuevo;
+		return pcn;
 	}
 	public PanelListarContactos crearPanelListarContactos() {
 		vi.getJContentPane().removeAll();
@@ -61,26 +57,5 @@ public class ControladorVentana {
 		vi.getJContentPane().add(pvc, BorderLayout.CENTER);
 		vi.getJContentPane().updateUI();
 		return pvc;
-	}
-	public PanelCitaNueva crearPanelCitaNueva() {
-		vi.getJContentPane().removeAll();
-		pCitaNueva = new PanelCitaNueva(this);
-		vi.getJContentPane().add(pCitaNueva, BorderLayout.CENTER);
-		vi.getJContentPane().updateUI();
-		return pCitaNueva;
-	}
-	public PanelListarCitas crearPanelListarCitas() {
-		vi.getJContentPane().removeAll();
-		pListarCitas = new PanelListarCitas(this);
-		vi.getJContentPane().add(pListarCitas, BorderLayout.CENTER);
-		vi.getJContentPane().updateUI();
-		return pListarCitas;
-	}
-	public PanelVisualizarCita crearPanelVisualizarCita(Cita cita) {
-		vi.getJContentPane().removeAll();
-		pVisualizarCita = new PanelVisualizarCita(this,cita);
-		vi.getJContentPane().add(pVisualizarCita, BorderLayout.CENTER);
-		vi.getJContentPane().updateUI();
-		return pVisualizarCita;
 	}
 }

@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -39,8 +37,6 @@ public class PanelVisualizarContacto extends JPanel{
 	private Contacto contacto = null;
 	private ControladorVentana cv = null;
 
-	private JButton jBEliminar = null;
-
 	public PanelVisualizarContacto(ControladorVentana cv, Contacto contacto) {
 		super();
 		this.cv = cv;
@@ -49,12 +45,7 @@ public class PanelVisualizarContacto extends JPanel{
 	}
 
 	private void initialize() {
-		GridBagConstraints gridBagConstraints13 = new GridBagConstraints();
-		gridBagConstraints13.gridx = 3;
-		gridBagConstraints13.gridy = 0;
 		GridBagConstraints gridBagConstraints16 = new GridBagConstraints();
-		gridBagConstraints16.gridx = 4;
-		gridBagConstraints16.gridy = 0;
 		GridBagConstraints gridBagConstraints15 = new GridBagConstraints();
 		gridBagConstraints15.gridx = 2;
 		gridBagConstraints15.gridy = 0;
@@ -63,10 +54,9 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints12.gridy = 5;
 		gridBagConstraints12.weightx = 1.0;
 		gridBagConstraints12.insets = new Insets(10, 10, 10, 10);
-		gridBagConstraints12.gridx = 4;
+		gridBagConstraints12.gridx = 3;
 		GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
-		gridBagConstraints11.gridx = 3;
-		gridBagConstraints11.anchor = GridBagConstraints.EAST;
+		gridBagConstraints11.gridx = 2;
 		gridBagConstraints11.gridy = 5;
 		jLFechaNacimiento = new JLabel();
 		jLFechaNacimiento.setText("Fecha de Nacimiento:");
@@ -78,7 +68,6 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints10.gridx = 1;
 		GridBagConstraints gridBagConstraints9 = new GridBagConstraints();
 		gridBagConstraints9.gridx = 0;
-		gridBagConstraints9.anchor = GridBagConstraints.EAST;
 		gridBagConstraints9.gridy = 5;
 		jLSector = new JLabel();
 		jLSector.setText("Sector:");
@@ -87,11 +76,10 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints8.gridy = 4;
 		gridBagConstraints8.weightx = 1.0;
 		gridBagConstraints8.insets = new Insets(10, 10, 10, 10);
-		gridBagConstraints8.gridx = 4;
+		gridBagConstraints8.gridx = 3;
 		GridBagConstraints gridBagConstraints7 = new GridBagConstraints();
-		gridBagConstraints7.gridx = 3;
+		gridBagConstraints7.gridx = 2;
 		gridBagConstraints7.insets = new Insets(0, 0, 0, 0);
-		gridBagConstraints7.anchor = GridBagConstraints.EAST;
 		gridBagConstraints7.gridy = 4;
 		jLeMail = new JLabel();
 		jLeMail.setText("eMail:");
@@ -104,7 +92,6 @@ public class PanelVisualizarContacto extends JPanel{
 		GridBagConstraints gridBagConstraints5 = new GridBagConstraints();
 		gridBagConstraints5.gridx = 0;
 		gridBagConstraints5.insets = new Insets(0, 10, 0, 0);
-		gridBagConstraints5.anchor = GridBagConstraints.EAST;
 		gridBagConstraints5.gridy = 4;
 		jLTelefono = new JLabel();
 		jLTelefono.setText("Teléfono:");
@@ -113,10 +100,9 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints4.gridy = 2;
 		gridBagConstraints4.weightx = 1.0;
 		gridBagConstraints4.insets = new Insets(10, 10, 10, 10);
-		gridBagConstraints4.gridx = 4;
+		gridBagConstraints4.gridx = 3;
 		GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
-		gridBagConstraints3.gridx = 3;
-		gridBagConstraints3.anchor = GridBagConstraints.EAST;
+		gridBagConstraints3.gridx = 2;
 		gridBagConstraints3.gridy = 2;
 		jLDireccion = new JLabel();
 		jLDireccion.setText("Dirección:");
@@ -129,7 +115,6 @@ public class PanelVisualizarContacto extends JPanel{
 		GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
 		gridBagConstraints1.gridx = 0;
 		gridBagConstraints1.insets = new Insets(0, 10, 0, 0);
-		gridBagConstraints1.anchor = GridBagConstraints.EAST;
 		gridBagConstraints1.gridy = 2;
 		jLNombre = new JLabel();
 		jLNombre.setText("Nombre:");
@@ -155,7 +140,6 @@ public class PanelVisualizarContacto extends JPanel{
 		this.add(getJTFFechaNacimiento(), gridBagConstraints12);
 		this.add(getJBModificarContacto(), gridBagConstraints15);
 		this.add(getJBInicio(), gridBagConstraints16);
-		this.add(getJBEliminar(), gridBagConstraints13);
 		jTFNombre.setText(contacto.getNombre());
 		jTFDireccion.setText(contacto.getDireccion());
 		jTFTelefono.setText(contacto.getTelefono());
@@ -163,8 +147,7 @@ public class PanelVisualizarContacto extends JPanel{
 		if(contacto instanceof Amigo){
 			jTFFechaNacimiento.setEnabled(true);
 			jTFSector.setEnabled(false);
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			jTFFechaNacimiento.setText(sdf.format(((Amigo)contacto).getFechaNacimiento()));
+			jTFFechaNacimiento.setText(((Amigo)contacto).getFechaNacimiento());
 		}else{
 			jTFFechaNacimiento.setEnabled(false);
 			jTFSector.setEnabled(true);
@@ -252,38 +235,12 @@ public class PanelVisualizarContacto extends JPanel{
 		contactoAux.setTelefono(jTFTelefono.getText());
 		contactoAux.setEMail(jTFeMail.getText());
 		if(contacto instanceof Amigo){
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			try {
-				((Amigo)contactoAux).setFechaNacimiento(sdf.parse(jTFFechaNacimiento.getText()));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			((Amigo)contactoAux).setFechaNacimiento(jTFFechaNacimiento.getText());
 		}else{
 			((Profesional)contactoAux).setSector(jTFSector.getText());
 		}
 		ControladorContactos cc = new ControladorContactos();
 		cc.actualizar(contactoAux);
-		cv.getAgenda().refresh();
-		volverInicio();
-	}
-
-	private JButton getJBEliminar() {
-		if (jBEliminar == null) {
-			jBEliminar = new JButton();
-			jBEliminar.setText("Eliminar");
-			jBEliminar
-			.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					eliminarContacto();
-				}
-			});
-		}
-		return jBEliminar;
-	}
-
-	protected void eliminarContacto() {
-		ControladorContactos cc = new ControladorContactos();
-		cc.eliminar(contacto);
 		cv.getAgenda().refresh();
 		volverInicio();
 	}

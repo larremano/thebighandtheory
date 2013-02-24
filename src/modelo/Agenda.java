@@ -3,9 +3,6 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import persistencia.AgendaDao;
-
-
 public class Agenda {
 
 	private List<Contacto> contactos = new ArrayList<Contacto>();
@@ -39,7 +36,6 @@ public class Agenda {
 		contactos = agDao.listarContactos();
 		profesionales = agDao.listarProfesionales();
 		amigos = agDao.listarAmigos();
-		citas = agDao.listarCitas(this);
 	}
 	public void refresh(){
 		inicializar();

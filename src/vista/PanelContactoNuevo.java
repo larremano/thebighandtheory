@@ -1,13 +1,9 @@
 package vista;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -16,17 +12,16 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-
 import controlador.ControladorContactos;
 
 import modelo.Amigo;
 import modelo.Contacto;
 import modelo.Profesional;
 
-public class PanelContactoNuevo extends JPanel{
+public class PanelContactoNuevo extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private ControladorVentana cv = null;
+	
 	private JLabel jLabel = null;
 	private JLabel jLNombre = null;
 	private JTextField jTFNombre = null;
@@ -47,7 +42,9 @@ public class PanelContactoNuevo extends JPanel{
 
 	private ButtonGroup bGroup = null;
 	private Contacto contacto = null;
-	
+	private ControladorContactos cc = null;
+	private ControladorVentana cv = null;
+
 	public PanelContactoNuevo(ControladorVentana cv) {
 		super();
 		this.cv = cv;
@@ -56,6 +53,7 @@ public class PanelContactoNuevo extends JPanel{
 
 	private void initialize() {
 		GridBagConstraints gridBagConstraints16 = new GridBagConstraints();
+
 		GridBagConstraints gridBagConstraints15 = new GridBagConstraints();
 		gridBagConstraints15.gridx = 2;
 		gridBagConstraints15.gridy = 0;
@@ -64,7 +62,7 @@ public class PanelContactoNuevo extends JPanel{
 		gridBagConstraints14.gridy = 6;
 		GridBagConstraints gridBagConstraints13 = new GridBagConstraints();
 		gridBagConstraints13.gridx = 1;
-		gridBagConstraints13.fill = GridBagConstraints.BOTH;
+		gridBagConstraints13.fill = GridBagConstraints.NONE;
 		gridBagConstraints13.gridy = 6;
 		GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
 		gridBagConstraints12.fill = GridBagConstraints.BOTH;
@@ -259,37 +257,18 @@ public class PanelContactoNuevo extends JPanel{
 	protected void nuevoContacto() {
 		if (jRBAmigo.isSelected()) {
 			contacto = new Amigo(jTFNombre.getText());
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			if(!"".equals(jTFFechaNacimiento.getText())){
-				try {
-					date = sdf.parse(jTFFechaNacimiento.getText());
-					((Amigo) contacto).setFechaNacimiento(date);
-					contacto.setDireccion(jTFDireccion.getText());
-					contacto.setTelefono(jTFTelefono.getText());
-					contacto.setEMail(jTFeMail.getText());
-					ControladorContactos cc = new ControladorContactos();
-					cc.cargar(contacto);
-					cv.getAgenda().refresh();
-					volverInicio();
-
-				} catch (ParseException e) {
-					jTFFechaNacimiento.setBackground(Color.RED);
-					jTFFechaNacimiento.setText("Introduce una fecha válida");
-					//e.printStackTrace();
-				}
-			}
+			((Amigo) contacto).setFechaNacimiento(jTFFechaNacimiento.getText());
 		} else {
 			contacto = new Profesional(jTFNombre.getText());
 			((Profesional) contacto).setSector(jTFSector.getText());
-			contacto.setDireccion(jTFDireccion.getText());
-			contacto.setTelefono(jTFTelefono.getText());
-			contacto.setEMail(jTFeMail.getText());
-			ControladorContactos cc = new ControladorContactos();
-			cc.cargar(contacto);
-			cv.getAgenda().refresh();
-			volverInicio();
 		}
+		contacto.setDireccion(jTFDireccion.getText());
+		contacto.setTelefono(jTFTelefono.getText());
+		contacto.setEMail(jTFeMail.getText());
+		cc = new ControladorContactos();
+		cc.cargar(contacto);
+		cv.getAgenda().refresh();
+		volverInicio();
 	}
 
 }
