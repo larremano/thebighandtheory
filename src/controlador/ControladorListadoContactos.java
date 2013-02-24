@@ -22,5 +22,7 @@ public class ControladorListadoContactos {
 			return agenda.getProfesionales();
 		}
 	}	
-
+	public List<Contacto> cargarListado(){
+			return agenda.getContactos();
+	}	
 }

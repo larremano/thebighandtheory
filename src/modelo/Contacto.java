@@ -53,4 +53,9 @@ public class Contacto {
 		eMail = mail;
 	}
 
+	@Override
+	public String toString() {
+		return this.getId() + "; " + this.getNombre();
+	}
+
 }

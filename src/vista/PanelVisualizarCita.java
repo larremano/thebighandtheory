@@ -6,49 +6,59 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import modelo.Amigo;
+import modelo.Cita;
 import modelo.Contacto;
-import modelo.Profesional;
-import controlador.ControladorContactos;
+import controlador.ControladorCitas;
+import javax.swing.JComboBox;
 
-public class PanelVisualizarContacto extends JPanel{
+public class PanelVisualizarCita extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	private JLabel jLabel = null;
-	private JLabel jLNombre = null;
-	private JTextField jTFNombre = null;
-	private JLabel jLDireccion = null;
-	private JTextField jTFDireccion = null;
+	private JLabel jLFecha = null;
+	private JTextField jTFFecha = null;
+	private JLabel jLContacto = null;
+	private JTextField jTFContacto = null;
 	private JLabel jLTelefono = null;
-	private JTextField jTFTelefono = null;
-	private JLabel jLeMail = null;
-	private JTextField jTFeMail = null;
-	private JLabel jLSector = null;
-	private JTextField jTFSector = null;
-	private JLabel jLFechaNacimiento = null;
-	private JTextField jTFFechaNacimiento = null;
-	private JButton jBModificarContacto = null;
+	private JTextField jTFLugar = null;
+	private JLabel jLHora = null;
+	private JTextField jTFHora = null;
+	private JLabel jLCaracter = null;
+	private JTextField jTFCaracter = null;
+	private JLabel jLFDescripcion = null;
+	private JTextField jTFDescripcion = null;
+	private JButton jBModificarCita = null;
 	private JButton jBInicio = null;
 
-	private Contacto contacto = null;
+	private Cita cita = null;
 	private ControladorVentana cv = null;
 
 	private JButton jBEliminar = null;
 
-	public PanelVisualizarContacto(ControladorVentana cv, Contacto contacto) {
+	private JComboBox jCBCaracter = null;
+
+	public PanelVisualizarCita(ControladorVentana cv, Cita cita) {
 		super();
 		this.cv = cv;
-		this.contacto = contacto;
+		this.cita = cita;
 		initialize();
 	}
 
 	private void initialize() {
+		GridBagConstraints gridBagConstraints31 = new GridBagConstraints();
+		gridBagConstraints31.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints31.gridy = 5;
+		gridBagConstraints31.weightx = 1.0;
+		gridBagConstraints31.insets = new Insets(10, 10, 10, 10);
+		gridBagConstraints31.gridx = 1;
 		GridBagConstraints gridBagConstraints13 = new GridBagConstraints();
 		gridBagConstraints13.gridx = 3;
 		gridBagConstraints13.gridy = 0;
@@ -68,20 +78,20 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints11.gridx = 3;
 		gridBagConstraints11.anchor = GridBagConstraints.EAST;
 		gridBagConstraints11.gridy = 5;
-		jLFechaNacimiento = new JLabel();
-		jLFechaNacimiento.setText("Fecha de Nacimiento:");
+		jLFDescripcion = new JLabel();
+		jLFDescripcion.setText("Descripción:");
 		GridBagConstraints gridBagConstraints10 = new GridBagConstraints();
 		gridBagConstraints10.fill = GridBagConstraints.BOTH;
 		gridBagConstraints10.gridy = 5;
 		gridBagConstraints10.weightx = 1.0;
 		gridBagConstraints10.insets = new Insets(10, 10, 10, 10);
-		gridBagConstraints10.gridx = 1;
+		gridBagConstraints10.gridx = 2;
 		GridBagConstraints gridBagConstraints9 = new GridBagConstraints();
 		gridBagConstraints9.gridx = 0;
 		gridBagConstraints9.anchor = GridBagConstraints.EAST;
 		gridBagConstraints9.gridy = 5;
-		jLSector = new JLabel();
-		jLSector.setText("Sector:");
+		jLCaracter = new JLabel();
+		jLCaracter.setText("Carácter:");
 		GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
 		gridBagConstraints8.fill = GridBagConstraints.BOTH;
 		gridBagConstraints8.gridy = 4;
@@ -93,8 +103,8 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints7.insets = new Insets(0, 0, 0, 0);
 		gridBagConstraints7.anchor = GridBagConstraints.EAST;
 		gridBagConstraints7.gridy = 4;
-		jLeMail = new JLabel();
-		jLeMail.setText("eMail:");
+		jLHora = new JLabel();
+		jLHora.setText("Hora:");
 		GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
 		gridBagConstraints6.fill = GridBagConstraints.BOTH;
 		gridBagConstraints6.gridy = 4;
@@ -107,7 +117,7 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints5.anchor = GridBagConstraints.EAST;
 		gridBagConstraints5.gridy = 4;
 		jLTelefono = new JLabel();
-		jLTelefono.setText("Teléfono:");
+		jLTelefono.setText("Lugar:");
 		GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
 		gridBagConstraints4.fill = GridBagConstraints.BOTH;
 		gridBagConstraints4.gridy = 2;
@@ -118,8 +128,8 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints3.gridx = 3;
 		gridBagConstraints3.anchor = GridBagConstraints.EAST;
 		gridBagConstraints3.gridy = 2;
-		jLDireccion = new JLabel();
-		jLDireccion.setText("Dirección:");
+		jLContacto = new JLabel();
+		jLContacto.setText("Contacto:");
 		GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
 		gridBagConstraints2.fill = GridBagConstraints.BOTH;
 		gridBagConstraints2.gridy = 2;
@@ -131,101 +141,99 @@ public class PanelVisualizarContacto extends JPanel{
 		gridBagConstraints1.insets = new Insets(0, 10, 0, 0);
 		gridBagConstraints1.anchor = GridBagConstraints.EAST;
 		gridBagConstraints1.gridy = 2;
-		jLNombre = new JLabel();
-		jLNombre.setText("Nombre:");
+		jLFecha = new JLabel();
+		jLFecha.setText("Fecha:");
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 0;
 		jLabel = new JLabel();
-		jLabel.setText("Contacto Nuevo");
+		jLabel.setText("Datos de la Cita");
 		this.setLayout(new GridBagLayout());
 		this.setSize(new Dimension(650, 200));
 		this.add(jLabel, gridBagConstraints);
-		this.add(jLNombre, gridBagConstraints1);
-		this.add(getJTFNombre(), gridBagConstraints2);
-		this.add(jLDireccion, gridBagConstraints3);
-		this.add(getJTFDireccion(), gridBagConstraints4);
+		this.add(jLFecha, gridBagConstraints1);
+		this.add(getJTFFecha(), gridBagConstraints2);
+		this.add(jLContacto, gridBagConstraints3);
+		this.add(getJTFContacto(), gridBagConstraints4);
 		this.add(jLTelefono, gridBagConstraints5);
-		this.add(getJTFTelefono(), gridBagConstraints6);
-		this.add(jLeMail, gridBagConstraints7);
-		this.add(getJTFeMail(), gridBagConstraints8);
-		this.add(jLSector, gridBagConstraints9);
-		this.add(getJTFSector(), gridBagConstraints10);
-		this.add(jLFechaNacimiento, gridBagConstraints11);
-		this.add(getJTFFechaNacimiento(), gridBagConstraints12);
-		this.add(getJBModificarContacto(), gridBagConstraints15);
+		this.add(getJTFLugar(), gridBagConstraints6);
+		this.add(jLHora, gridBagConstraints7);
+		this.add(getJTFHora(), gridBagConstraints8);
+		this.add(jLCaracter, gridBagConstraints9);
+		this.add(getJTFCaracter(), gridBagConstraints10);
+		this.add(jLFDescripcion, gridBagConstraints11);
+		this.add(getJTFDescripcion(), gridBagConstraints12);
+		this.add(getJBModificarCita(), gridBagConstraints15);
 		this.add(getJBInicio(), gridBagConstraints16);
 		this.add(getJBEliminar(), gridBagConstraints13);
-		jTFNombre.setText(contacto.getNombre());
-		jTFDireccion.setText(contacto.getDireccion());
-		jTFTelefono.setText(contacto.getTelefono());
-		jTFeMail.setText(contacto.getEMail());
-		if(contacto instanceof Amigo){
-			jTFFechaNacimiento.setEnabled(true);
-			jTFSector.setEnabled(false);
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			jTFFechaNacimiento.setText(sdf.format(((Amigo)contacto).getFechaNacimiento()));
-		}else{
-			jTFFechaNacimiento.setEnabled(false);
-			jTFSector.setEnabled(true);
-			jTFSector.setText(((Profesional)contacto).getSector());
-		}
+		this.add(getJCBCaracter(), gridBagConstraints31);
+		Date date = new Date();
+		date = cita.getDate();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		jTFFecha.setText(sdf.format(date));
+		jTFContacto.setText(cita.getContacto().getNombre());
+		jTFLugar.setText(cita.getLugar());
+		jTFHora.setText(cita.getHora());
+		jTFDescripcion.setText(cita.getDescripcion());
+		jTFCaracter.setText(cita.getCaracter());
 	}
 
-	private JTextField getJTFNombre() {
-		if (jTFNombre == null) {
-			jTFNombre = new JTextField();
+	private JTextField getJTFFecha() {
+		if (jTFFecha == null) {
+			jTFFecha = new JTextField();
 		}
-		return jTFNombre;
+		return jTFFecha;
 	}
 
-	private JTextField getJTFDireccion() {
-		if (jTFDireccion == null) {
-			jTFDireccion = new JTextField();
+	private JTextField getJTFContacto() {
+		if (jTFContacto == null) {
+			jTFContacto = new JTextField();
 		}
-		return jTFDireccion;
+		return jTFContacto;
 	}
 
-	private JTextField getJTFTelefono() {
-		if (jTFTelefono == null) {
-			jTFTelefono = new JTextField();
+	private JTextField getJTFLugar() {
+		if (jTFLugar == null) {
+			jTFLugar = new JTextField();
 		}
-		return jTFTelefono;
+		return jTFLugar;
 	}
 
-	private JTextField getJTFeMail() {
-		if (jTFeMail == null) {
-			jTFeMail = new JTextField();
+	private JTextField getJTFHora() {
+		if (jTFHora == null) {
+			jTFHora = new JTextField();
 		}
-		return jTFeMail;
+		return jTFHora;
 	}
 
-	private JTextField getJTFSector() {
-		if (jTFSector == null) {
-			jTFSector = new JTextField();
+	private JTextField getJTFCaracter() {
+		if (jTFCaracter == null) {
+			jTFCaracter = new JTextField();
+			jTFCaracter.setEditable(true);
+			jTFCaracter.setEnabled(false);
 		}
-		return jTFSector;
+		return jTFCaracter;
 	}
 
-	private JTextField getJTFFechaNacimiento() {
-		if (jTFFechaNacimiento == null) {
-			jTFFechaNacimiento = new JTextField();
+	private JTextField getJTFDescripcion() {
+		if (jTFDescripcion == null) {
+			jTFDescripcion = new JTextField();
 		}
-		return jTFFechaNacimiento;
+		return jTFDescripcion;
 	}
 
-	private JButton getJBModificarContacto() {
-		if (jBModificarContacto == null) {
-			jBModificarContacto = new JButton();
-			jBModificarContacto.setText("Actualizar");
-			jBModificarContacto
+	private JButton getJBModificarCita() {
+		if (jBModificarCita == null) {
+			jBModificarCita = new JButton();
+			jBModificarCita.setText("Actualizar");
+			jBModificarCita
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							actualizarContacto();
+							actualizarCita();
 						}
 					});
 		}
-		return jBModificarContacto;
+		return jBModificarCita;
 	}
 
 	private JButton getJBInicio() {
@@ -245,26 +253,36 @@ public class PanelVisualizarContacto extends JPanel{
 		cv.crearPanelInicio();
 	}
 
-	protected void actualizarContacto() {
-		Contacto contactoAux = contacto;
-		contactoAux.setNombre(jTFNombre.getText());
-		contactoAux.setDireccion(jTFDireccion.getText());
-		contactoAux.setTelefono(jTFTelefono.getText());
-		contactoAux.setEMail(jTFeMail.getText());
-		if(contacto instanceof Amigo){
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			try {
-				((Amigo)contactoAux).setFechaNacimiento(sdf.parse(jTFFechaNacimiento.getText()));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}else{
-			((Profesional)contactoAux).setSector(jTFSector.getText());
+	protected void actualizarCita() {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			date = sdf.parse(jTFFecha.getText());
+			cita.setDate(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		ControladorContactos cc = new ControladorContactos();
-		cc.actualizar(contactoAux);
+		if(!jTFContacto.getText().equalsIgnoreCase(cita.getContacto().getNombre())){
+			buscarContactoPorNombre(jTFContacto.getText());
+		}
+		cita.setLugar(jTFLugar.getText());
+		cita.setHora(jTFHora.getText());
+		cita.setDescripcion(jTFDescripcion.getText());
+		ControladorCitas cc = new ControladorCitas();
+		cc.actualizar(cita);
 		cv.getAgenda().refresh();
 		volverInicio();
+	}
+
+	private void buscarContactoPorNombre(String text) {
+		List<Contacto> contactos = cv.getAgenda().getContactos();
+		for(Contacto contacto : contactos){
+			if(contacto.getNombre().equalsIgnoreCase(text)){
+				cita.setContacto(contacto);
+				break;
+			}
+		}
+		
 	}
 
 	private JButton getJBEliminar() {
@@ -274,18 +292,29 @@ public class PanelVisualizarContacto extends JPanel{
 			jBEliminar
 			.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					eliminarContacto();
+					eliminarCita();
 				}
 			});
 		}
 		return jBEliminar;
 	}
 
-	protected void eliminarContacto() {
-		ControladorContactos cc = new ControladorContactos();
-		cc.eliminar(contacto);
+	protected void eliminarCita() {
+		ControladorCitas cc = new ControladorCitas();
+		cc.eliminarCita(cita);
 		cv.getAgenda().refresh();
 		volverInicio();
 	}
 
+	private JComboBox getJCBCaracter() {
+		if (jCBCaracter == null) {
+			jCBCaracter = new JComboBox();
+			jCBCaracter.addItem("Ninguno");
+			jCBCaracter.addItem("Ocio");
+			jCBCaracter.addItem("Trabajo");
+			jCBCaracter.addItem("Cumpleaños");
+			jCBCaracter.addItem("Deporte");
+		}
+		return jCBCaracter;
+	}
 }
